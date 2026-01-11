@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎮 Guarida Pokémon - Mimikyu & Pikachu</title>
+    
+    <!-- FAVICON POKÉBOLA -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚫</text></svg>">
+    <link rel="icon" type="image/png" href="https://img.icons8.com/color/96/000000/pokeball--v1.png">
+    
+    <!-- FUENTES DE GOOGLE -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Comic+Neue:wght@700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FONT AWESOME PARA ÍCONOS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ===== VARIABLES Y RESET ===== */
+        :root {
+            --amarillo-pikachu: #FFDE00;
+            --rojo-pokebola: #FF0000;
+            --azul-pokebola: #3B4CCA;
+            --morado-mimikyu: #8B00FF;
+            --naranja-fuego: #FF6B00;
+            --verde-planta: #4CAF50;
+            --azul-agua: #2196F3;
+            --sombra: rgba(0,0,0,0.15);
+            --gradiente-fondo: linear-gradient(135deg, #FFDE00 0%, #FF8C00 100%);
+        }
+        
+          @keyframes girarPokebola {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    
+    @keyframes flotarSuave {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-15px); }
+    }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background: var(--gradiente-fondo);
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* FONDO ANIMADO CON POKÉBOLAS */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 0, 0, 0.05) 20px, transparent 20px),
+                radial-gradient(circle at 90% 30%, rgba(59, 76, 202, 0.05) 15px, transparent 15px),
+                radial-gradient(circle at 50% 80%, rgba(255, 0, 0, 0.05) 25px, transparent 25px),
+                radial-gradient(circle at 20% 70%, rgba(59, 76, 202, 0.05) 18px, transparent 18px);
+            background-size: 200px 200px;
+            z-index: -1;
+            opacity: 0.3;
+        }
+        
+        /* ===== CONTENEDOR PRINCIPAL ===== */
+        .contenedor {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.97);
+            border-radius: 25px;
+            padding: 30px;
+            box-shadow: 
+                0 15px 35px rgba(0,0,0,0.2),
+                inset 0 0 0 5px var(--amarillo-pikachu),
+                inset 0 0 0 10px rgba(255, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            border: 8px solid transparent;
+            background-clip: padding-box;
+        }
+        
+        .contenedor::before {
+            content: "";
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: linear-gradient(45deg, var(--rojo-pokebola), var(--amarillo-pikachu), var(--azul-pokebola));
+            border-radius: 30px;
+            z-index: -1;
+            animation: bordeAnimado 3s infinite linear;
+        }
+        
+        @keyframes bordeAnimado {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+        
+        /* ===== HEADER ===== */
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 5px dotted var(--morado-mimikyu);
+            position: relative;
+        }
+        
+        .pokebola-header {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(var(--rojo-pokebola) 50%, white 50%);
+            border-radius: 50%;
+            border: 5px solid black;
+            margin: 0 auto 20px;
+            position: relative;
+            animation: girarPokebola 10s infinite linear;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .pokebola-header::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 25px;
+            height: 25px;
+            background: white;
+            border: 5px solid black;
+            border-radius: 50%;
+            z-index: 2;
+        }
+        
+        .pokebola-header::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: black;
+            z-index: 1;
+        }
+        
+        @keyframes girarPokebola {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        h1 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 2.5rem;
+            color: var(--morado-mimikyu);
+            text-shadow: 
+                3px 3px 0px #FFD700,
+                -1px -1px 0px #000,
+                1px -1px 0px #000,
+                -1px 1px 0px #000,
+                1px 1px 0px #000;
+            margin-bottom: 15px;
+            animation: tituloPulso 2s infinite, tituloBrillo 3s infinite alternate;
+            background: linear-gradient(45deg, var(--morado-mimikyu), var(--rojo-pokebola));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        @keyframes tituloPulso {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+        
+        @keyframes tituloBrillo {
+            0% { filter: brightness(1); }
+            100% { filter: brightness(1.2); }
+        }
+        
+        .subtitulo {
+            font-family: 'Comic Neue', cursive;
+            font-size: 1.4rem;
+            color: var(--naranja-fuego);
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .subtitulo::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 10%;
+            width: 80%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--naranja-fuego), transparent);
+        }
+        
+        /* ===== NAVEGACIÓN ===== */
+        .navegacion {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 30px 0;
+            padding: 15px;
+            background: rgba(139, 0, 255, 0.1);
+            border-radius: 15px;
+            border: 2px solid var(--morado-mimikyu);
+        }
+        
+        .nav-boton {
+            padding: 12px 25px;
+            background: linear-gradient(to right, var(--morado-mimikyu), var(--azul-pokebola));
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .nav-boton:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(139, 0, 255, 0.3);
+            background: linear-gradient(to right, var(--azul-pokebola), var(--morado-mimikyu));
+            border-color: var(--amarillo-pikachu);
+        }
+        
+        /* ===== SECCIONES ===== */
+        .seccion {
+            margin-bottom: 50px;
+            padding: 30px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px var(--sombra);
+            transition: transform 0.4s;
+            border-left: 8px solid var(--morado-mimikyu);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .seccion:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        
+        .seccion::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--morado-mimikyu), var(--naranja-fuego), var(--azul-pokebola));
+        }
+        
+        h2 {
+            font-family: 'Comic Neue', cursive;
+            font-size: 2rem;
+            color: var(--morado-mimikyu);
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #FFD700;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        h2 i {
+            color: var(--naranja-fuego);
+            font-size: 1.8rem;
+        }
+        
+        h3 {
+            color: var(--azul-pokebola);
+            font-size: 1.5rem;
+            margin: 20px 0 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        /* ===== IMAGEN DESTACADA ===== */
+        .imagen-destacada {
+            text-align: center;
+            margin: 30px 0;
+            position: relative;
+        }
+        
+        .marco-imagen {
+            display: inline-block;
+            padding: 15px;
+            background: linear-gradient(45deg, var(--rojo-pokebola), var(--amarillo-pikachu));
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        
+        .marco-imagen::before {
+            content: "⭐ FOTO OFICIAL ⭐";
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--morado-mimikyu);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            z-index: 2;
+            white-space: nowrap;
+        }
+        
+        .imagen-destacada img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            border: 5px solid white;
+            display: block;
+            transition: all 0.5s;
+        }
+        
+        .imagen-destacada img:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+    @keyframes girarPokebola {
+        0% { transform: rotate(0deg) scale(1); }
+        50% { transform: rotate(180deg) scale(1.05); }
+        100% { transform: rotate(360deg) scale(1); }
+    }
+    
+    @keyframes flotarSuave {
+        0%, 100% { transform: translateY(0) rotate(0deg); }
+        33% { transform: translateY(-15px) rotate(1deg); }
+        66% { transform: translateY(-8px) rotate(-1deg); }
+    }
+    
+    /* EFECTO DE COPIA AL HACER HOVER EN EL CORREO */
+    .formulario-container code:hover {
+        background: #FFD700 !important;
+        cursor: copy;
+        transition: all 0.3s;
+    }
+        
+        /* ===== LISTAS DE ATAQUES ===== */
+        .contenedor-listas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        .carta-ataques {
+            background: linear-gradient(145deg, var(--morado-mimikyu), #6A0DAD);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .carta-ataques::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #FFD700, transparent);
+        }
+        
+        .carta-ataques:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.3);
+        }
+        
+        .carta-ataques h3 {
+            color: #FFD700;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+        
+        .tipo-pokemon {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-left: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .lista-ataques {
+            list-style: none;
+        }
+        
+        .lista-ataques li {
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            border-left: 4px solid #FFD700;
+            transition: all 0.3s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .lista-ataques li:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(10px);
+        }
+        
+        .poder-ataque {
+            background: rgba(255, 0, 0, 0.7);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        /* ===== EQUIPO POKÉMON ===== */
+        .equipo-pokemon {
+            margin-top: 40px;
+        }
+        
+        .pokemon-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .pokemon-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 10px 20px var(--sombra);
+            border: 3px solid transparent;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pokemon-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--morado-mimikyu), var(--naranja-fuego));
+        }
+        
+        .pokemon-card:hover {
+            transform: translateY(-15px);
+            border-color: var(--morado-mimikyu);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+        }
+        
+        .pokemon-img {
+            width: 140px;
+            height: 140px;
+            object-fit: contain;
+            margin: 0 auto 20px;
+            filter: drop-shadow(0 10px 10px rgba(0,0,0,0.3));
+            transition: all 0.5s;
+        }
+        
+        .pokemon-card:hover .pokemon-img {
+            transform: scale(1.1) rotate(5deg);
+            filter: drop-shadow(0 15px 15px rgba(0,0,0,0.4));
+        }
+        
+        .pokemon-card h3 {
+            color: var(--morado-mimikyu);
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+        }
+        
+        .pokemon-rol {
+            color: var(--naranja-fuego);
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .pokemon-desc {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+        
+        .pokemon-tipo {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        
+        .tipo-fantasma { background: #7B62A3; color: white; }
+        .tipo-electrico { background: #F8D030; color: black; }
+        .tipo-siniestro { background: #707070; color: white; }
+        
+        /* ===== FORMULARIO ===== */
+        .formulario-container {
+            background: linear-gradient(135deg, rgba(139, 0, 255, 0.05), rgba(255, 107, 0, 0.05));
+            padding: 40px;
+            border-radius: 20px;
+            border: 3px dashed var(--morado-mimikyu);
+            margin-top: 30px;
+        }
+        
+        .formulario {
+            display: grid;
+            gap: 25px;
+        }
+        
+        .grupo-formulario {
+            position: relative;
+        }
+        
+        .grupo-formulario label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: var(--morado-mimikyu);
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .grupo-formulario input,
+        .grupo-formulario select,
+        .grupo-formulario textarea {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #ddd;
+            border-radius: 15px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: white;
+        }
+        
+        .grupo-formulario input:focus,
+        .grupo-formulario select:focus,
+        .grupo-formulario textarea:focus {
+            outline: none;
+            border-color: var(--morado-mimikyu);
+            box-shadow: 0 0 0 3px rgba(139, 0, 255, 0.2);
+            transform: translateY(-3px);
+        }
+        
+        .grupo-formulario input:valid,
+        .grupo-formulario textarea:valid {
+            border-color: var(--verde-planta);
+        }
+        
+        .grupo-formulario input:invalid:not(:focus):not(:placeholder-shown) {
+            border-color: var(--rojo-pokebola);
+        }
+        
+        .checkbox-grupo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .checkbox-grupo input[type="checkbox"] {
+            width: auto;
+            transform: scale(1.3);
+        }
+        
+        .checkbox-grupo label {
+            margin-bottom: 0;
+        }
+        
+        /* ===== BOTONES ===== */
+        .boton {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 16px 35px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .boton-primario {
+            background: linear-gradient(45deg, var(--morado-mimikyu), var(--azul-pokebola));
+            color: white;
+            box-shadow: 0 10px 20px rgba(139, 0, 255, 0.3);
+        }
+        
+        .boton-primario:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(139, 0, 255, 0.4);
+            background: linear-gradient(45deg, var(--azul-pokebola), var(--morado-mimikyu));
+        }
+        
+        .boton-secundario {
+            background: linear-gradient(45deg, var(--naranja-fuego), #FF8C00);
+            color: white;
+            box-shadow: 0 10px 20px rgba(255, 107, 0, 0.3);
+        }
+        
+        .boton-secundario:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 107, 0, 0.4);
+        }
+        
+        .boton-enviar {
+            background: linear-gradient(45deg, var(--verde-planta), #2E7D32);
+            color: white;
+            font-size: 1.2rem;
+            padding: 18px 40px;
+            margin-top: 20px;
+            box-shadow: 0 10px 20px rgba(76, 175, 80, 0.3);
+            width: 100%;
+        }
+        
+        .boton-enviar:hover {
+            background: linear-gradient(45deg, #2E7D32, var(--verde-planta));
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(76, 175, 80, 0.4);
+        }
+        
+        .boton-reset {
+            background: linear-gradient(45deg, #9E9E9E, #616161);
+            color: white;
+            margin-left: 15px;
+        }
+        
+        .boton-reset:hover {
+            background: linear-gradient(45deg, #616161, #9E9E9E);
+        }
+        
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 5px dotted #FFD700;
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        .footer-redes {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .red-social {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--morado-mimikyu), var(--azul-pokebola));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        
+        .red-social:hover {
+            transform: translateY(-5px) rotate(15deg);
+            box-shadow: 0 10px 20px rgba(139, 0, 255, 0.3);
+        }
+        
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 992px) {
+            .contenedor {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .pokemon-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.7rem;
+            }
+            
+            .seccion {
+                padding: 20px;
+            }
+            
+            .pokemon-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .contenedor-listas {
+                grid-template-columns: 1fr;
+            }
+            
+            .navegacion {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav-boton {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .formulario-container {
+                padding: 25px;
+            }
+        }
+        
+        /* ===== EFECTOS ESPECIALES ===== */
+        .badge {
+            background: linear-gradient(45deg, var(--rojo-pokebola), var(--naranja-fuego));
+            color: white;
+            padding: 8px 18px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: inline-block;
+            margin-left: 10px;
+            box-shadow: 0 5px 10px rgba(255, 0, 0, 0.2);
+        }
+        
+        .contador-visitas {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        /* ===== MENSAJES ===== */
+        .mensaje-exito {
+            background: linear-gradient(45deg, var(--verde-planta), #2E7D32);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 20px;
+            display: none;
+            animation: aparecer 0.5s ease;
+        }
+        
+        @keyframes aparecer {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* ===== SCROLLBAR PERSONALIZADA ===== */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: linear-gradient(var(--amarillo-pikachu), #FFA500);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--morado-mimikyu), var(--azul-pokebola));
+            border-radius: 10px;
+            border: 2px solid var(--amarillo-pikachu);
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(var(--azul-pokebola), var(--morado-mimikyu));
+        }
+    </style>
+</head>
+<body>
+    <!-- CONTADOR DE VISITAS -->
+    <div class="contador-visitas">
+        <i class="fas fa-eye"></i>
+        <span id="contador">0</span> visitas
+    </div>
+    
+    <div class="contenedor">
+        <!-- HEADER -->
+        <header>
+            <div class="pokebola-header"></div>
+            <h1>🎮 GUARIDA POKÉMON 🎮</h1>
+            <p class="subtitulo">Mimikyu & Pikachu - Aventuras en el código</p>
+            
+            <!-- NAVEGACIÓN -->
+            <nav class="navegacion">
+                <a href="#historia" class="nav-boton"><i class="fas fa-book"></i> Nuestra Historia</a>
+                <a href="#ataques" class="nav-boton"><i class="fas fa-fist-raised"></i> Nuestros Ataques</a>
+                <a href="#equipo" class="nav-boton"><i class="fas fa-users"></i> Nuestro Equipo</a>
+                <a href="#unirse" class="nav-boton"><i class="fas fa-user-plus"></i> ¡Únete a Nosotros!</a>
+            </nav>
+        </header>
+        
+        <main>
+            <!-- SECCIÓN HISTORIA -->
+            <section id="historia" class="seccion">
+                <h2><i class="fas fa-book-open"></i> Nuestra Historia</h2>
+                <p>En los misteriosos bosques de <strong>Alola</strong>, donde la luna brilla más que el sol, nació una amistad que desafía todas las expectativas. Yo, <strong>Mimikyu</strong>, el Pokémon que se esconde tras un disfraz, encontré en <strong>Pikachu</strong> al amigo que nunca supe que necesitaba.</p>
+                
+                <div class="imagen-destacada">
+                    <div class="marco-imagen">
+                        <img src="https://th.bing.com/th/id/OIP.TuFqZnPYpURIIXzE5K--yQHaF8?w=248&h=198&c=7&r=0&o=5&dpr=1.3&pid=1.7" 
+                             alt="Mimikyu y Pikachu siendo amigos">
+                    </div>
+                    <p style="margin-top: 20px;">
+                        <a href="https://th.bing.com/th/id/OIP.TuFqZnPYpURIIXzE5K--yQHaF8?w=248&h=198&c=7&r=0&o=5&dpr=1.3&pid=1.7" 
+                           target="_blank" class="boton boton-secundario">
+                            <i class="fas fa-expand"></i> Ver imagen en tamaño completo
+                        </a>
+                    </p>
+                </div>
+                
+                <h3><i class="fas fa-exclamation-triangle"></i> ¡ADVERTENCIA!</h3>
+                <p>Si alguna vez me ves sin mi disfraz de Pikachu... prepárate para una maldición que recordarás por siempre. Mi verdadera forma es un misterio que pocos han visto y vivido para contarlo. 😈</p>
+                
+                <h3><i class="fas fa-heart"></i> La verdad detrás del mito</h3>
+                <p>La gente cree que los Pokémon tipo eléctrico y fantasma no pueden ser amigos, pero Pikachu y yo demostramos lo contrario. Compartimos berries, jugamos a las escondidas en los bosques de Alola y hasta hemos creado ataques combinados.</p>
+                
+                <div style="text-align: center; margin-top: 30px;">
+                    <button class="boton boton-primario" id="btnCuriosidad">
+                        <i class="fas fa-lightbulb"></i> ¿Sabías que...?
+                    </button>
+                    <p id="curiosidad" style="margin-top: 15px; font-style: italic; color: var(--morado-mimikyu);"></p>
+                </div>
+            </section>
+            
+            <!-- SECCIÓN ATAQUES -->
+            <section id="ataques" class="seccion">
+                <h2><i class="fas fa-fist-raised"></i> Nuestros Ataques Favoritos</h2>
+                <p>Cada Pokémon tiene su estilo de batalla único. Aquí están nuestros movimientos más poderosos:</p>
+                
+                <div class="contenedor-listas">
+                    <!-- MIMIKYU -->
+                    <div class="carta-ataques">
+                        <h3>🎭 MIMIKYU <span class="tipo-pokemon">Fantasma/Hada</span></h3>
+                        <ul class="lista-ataques">
+                            <li>
+                                <span><strong>Garra Umbría</strong> - Ataque oscuro sorpresa</span>
+                                <span class="poder-ataque">80 PS</span>
+                            </li>
+                            <li>
+                                <span><strong>Venganza</strong> - Más poder si me atacan primero</span>
+                                <span class="poder-ataque">60-120 PS</span>
+                            </li>
+                            <li>
+                                <span><strong>Somanta</strong> - Golpe fantasma potente</span>
+                                <span class="poder-ataque">90 PS</span>
+                            </li>
+                            <li>
+                                <span><strong>Bola Sombra</strong> - Proyectil de energía oscura</span>
+                                <span class="poder-ataque">80 PS</span>
+                            </li>
+                            <li>
+                                <span><strong>Danza Espada</strong> - Aumenta mi ataque</span>
+                                <span class="poder-ataque">+2 ATQ</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- PIKACHU -->
+                    <div class="carta-ataques">
+                        <h3>⚡ PIKACHU <span class="tipo-pokemon">Eléctrico</span></h3>
+                        <ul class="lista-ataques">
+                            <li>
+                                <span><strong>Trueno</strong> - Rayo poderoso del cielo</span>
+                                <span class="poder-ataque">110 PS</span>
+                            </li>
+                            <li>
+                                <span><strong>Bola Voltio</strong> - Esfera eléctrica concentrada</span>
+                                <span class="poder-ataque">90 PS</span>
+                            </li>
+                            <li>
+                                <span><strong>Impactrueno</strong> - Carga eléctrica cuerpo a cuerpo</span>
+                                <span class="poder-ataque">40 PS</span>
+                            </li>
+                            <li>
+                                <span><strong>Cola Férrea</strong> - Golpe metálico sorpresa</span>
+                                <span class="poder-ataque">100 PS</span>
+                            </li>
+                            <li>
+                                <span><strong>Velocidad Extrema</strong> - Ataco primero siempre</span>
+                                <span class="poder-ataque">+2 VEL</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- SECCIÓN EQUIPO -->
+            <section id="equipo" class="seccion">
+                <h2><i class="fas fa-users"></i> Mi Equipo de Confianza</h2>
+                <p>En mis aventuras por Alola y más allá, he formado un equipo increíble:</p>
+                
+                <div class="pokemon-container">
+                    <!-- MIMIKYU -->
+                    <div class="pokemon-card">
+                        <img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/778.png" 
+                             alt="Mimikyu" class="pokemon-img">
+                        <h3>Mimikyu</h3>
+                        <span class="pokemon-rol"><i class="fas fa-crown"></i> Líder del equipo</span>
+                        <p class="pokemon-desc">Pokémon misterioso que se esconde bajo un disfraz. Nadie sabe cómo es en realidad...</p>
+                        <div>
+                            <span class="pokemon-tipo tipo-fantasma">Fantasma</span>
+                            <span class="pokemon-tipo tipo-fantasma">Hada</span>
+                        </div>
+                    </div>
+                    
+                    <!-- PIKACHU -->
+                    <div class="pokemon-card">
+                        <img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png" 
+                             alt="Pikachu" class="pokemon-img">
+                        <h3>Pikachu</h3>
+                        <span class="pokemon-rol"><i class="fas fa-bolt"></i> Mejor amigo</span>
+                        <p class="pokemon-desc">Su electricidad no solo es para combatir, también carga nuestros dispositivos móviles.</p>
+                        <div>
+                            <span class="pokemon-tipo tipo-electrico">Eléctrico</span>
+                        </div>
+                    </div>
+                    
+                    <!-- BANETTE -->
+                    <div class="pokemon-card">
+                        <img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/354.png" 
+                             alt="Banette" class="pokemon-img">
+                        <h3>Banette</h3>
+                        <span class="pokemon-rol"><i class="fas fa-ghost"></i> Estratega</span>
+                        <p class="pokemon-desc">Antiguo juguete abandonado, ahora un Pokémon poderoso con ideas brillantes.</p>
+                        <div>
+                            <span class="pokemon-tipo tipo-fantasma">Fantasma</span>
+                        </div>
+                    </div>
+                    
+                    <!-- UMBREON -->
+                    <div class="pokemon-card">
+                        <img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/197.png" 
+                             alt="Umbreon" class="pokemon-img">
+                        <h3>Umbreon</h3>
+                        <span class="pokemon-rol"><i class="fas fa-moon"></i> Guardián nocturno</span>
+                        <p class="pokemon-desc">Sus anillos brillan en la oscuridad y liberan toxinas para proteger al equipo.</p>
+                        <div>
+                            <span class="pokemon-tipo tipo-siniestro">Siniestro</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+          <!-- SECCIÓN UNIRSE (VERSIÓN SIMPLE Y DIRECTA) -->
+<section id="unirse" class="seccion">
+    <h2><i class="fas fa-user-plus"></i> ¡Únete a Nuestro Equipo!</h2>
+    <p>¿Quieres formar parte de nuestras aventuras en Alola y más allá?</p>
+    
+    <div class="formulario-container" style="text-align: center; padding: 50px 30px;">
+        <!-- POKÉBOLA ANIMADA -->
+        <div style="width: 120px; height: 120px; background: linear-gradient(#FF0000 50%, white 50%); border-radius: 50%; border: 8px solid black; margin: 0 auto 40px; position: relative; animation: girarPokebola 8s infinite linear; box-shadow: 0 10px 25px rgba(0,0,0,0.3);">
+            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 35px; height: 35px; background: white; border: 8px solid black; border-radius: 50%;"></div>
+            <div style="position: absolute; top: 50%; left: 0; right: 0; height: 8px; background: black;"></div>
+        </div>
+        
+        <!-- MENSAJE PRINCIPAL -->
+        <div style="background: linear-gradient(135deg, rgba(255, 0, 0, 0.1), rgba(139, 0, 255, 0.1)); padding: 30px; border-radius: 20px; margin-bottom: 40px; border: 3px solid var(--morado-mimikyu);">
+            <h3 style="color: var(--morado-mimikyu); font-size: 2rem; margin-bottom: 20px;">
+                <i class="fas fa-envelope-open-text"></i> SI QUIERES UNIRTE:
+            </h3>
+            
+            <div style="font-size: 1.3rem; line-height: 1.8; margin-bottom: 30px;">
+                <p>Envía un <strong>Gmail</strong> a:</p>
+                
+                <!-- CORREO DESTACADO -->
+                <div style="margin: 25px 0; padding: 5px;">
+                    <div style="display: inline-block; background: white; padding: 20px 40px; border-radius: 15px; border: 4px solid var(--rojo-pokebola); box-shadow: 0 10px 20px rgba(0,0,0,0.2);">
+                        <span style="color: var(--rojo-pokebola); font-weight: bold; font-size: 1.8rem; font-family: 'Courier New', monospace;">
+                            Elmrmimikyu@gmail.com
+                        </span>
+                    </div>
+                </div>
+                
+                <p>Con <strong>TU NOMBRE POKEMON REAL</strong> (no tu mote)</p>
+                <p style="color: var(--naranja-fuego); font-weight: bold;">
+                    <i class="fas fa-exclamation-circle"></i> ¡SOLO NOMBRES REALES, NADA DE MOTES!
+                </p>
+            </div>
+        </div>
+        
+        <!-- INSTRUCCIONES -->
+        <div style="background: rgba(255, 215, 0, 0.15); padding: 30px; border-radius: 20px; margin-bottom: 40px; border: 3px dashed #FFD700;">
+            <h4 style="color: var(--azul-pokebola); margin-bottom: 25px; font-size: 1.5rem;">
+                <i class="fas fa-list-ol"></i> Instrucciones paso a paso:
+            </h4>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; text-align: left;">
+                <div style="background: white; padding: 20px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                    <div style="width: 50px; height: 50px; background: var(--morado-mimikyu); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.5rem; margin-bottom: 15px;">
+                        1
+                    </div>
+                    <h5 style="color: var(--morado-mimikyu); margin-bottom: 10px;">Abre tu Gmail</h5>
+                    <p>Ve a <strong>gmail.com</strong> en tu navegador</p>
+                </div>
+                
+                <div style="background: white; padding: 20px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                    <div style="width: 50px; height: 50px; background: var(--rojo-pokebola); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.5rem; margin-bottom: 15px;">
+                        2
+                    </div>
+                    <h5 style="color: var(--rojo-pokebola); margin-bottom: 10px;">Copia mi correo</h5>
+                    <p>Copia: <code style="background: #f5f5f5; padding: 3px 8px; border-radius: 5px; font-family: monospace;">Elmrmimikyu@gmail.com</code></p>
+                </div>
+                
+                <div style="background: white; padding: 20px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                    <div style="width: 50px; height: 50px; background: var(--naranja-fuego); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.5rem; margin-bottom: 15px;">
+                        3
+                    </div>
+                    <h5 style="color: var(--naranja-fuego); margin-bottom: 10px;">Escribe el email</h5>
+                    <p>Pega mi correo en "Para" y escribe tu <strong>nombre Pokemon</strong></p>
+                </div>
+                
+                <div style="background: white; padding: 20px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                    <div style="width: 50px; height: 50px; background: var(--verde-planta); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.5rem; margin-bottom: 15px;">
+                        4
+                    </div>
+                    <h5 style="color: var(--verde-planta); margin-bottom: 10px;">¡Envía y espera!</h5>
+                    <p>Envía el correo y espera mi respuesta desde Alola</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- MENSAJE FINAL -->
+        <div style="margin-top: 40px; padding: 25px; background: rgba(139, 0, 255, 0.1); border-radius: 15px; position: relative; overflow: hidden;">
+            <div style="position: absolute; top: -50px; right: -50px; font-size: 10rem; opacity: 0.1; color: var(--morado-mimikyu);">
+                <i class="fas fa-heart"></i>
+            </div>
+            
+            <p style="font-size: 1.5rem; color: var(--morado-mimikyu); margin-bottom: 15px;">
+                <i class="fas fa-hands-helping"></i> ¡Te espero en Alola!
+            </p>
+            
+            <p style="font-size: 1.2rem; line-height: 1.6;">
+                <strong>Te mando un abrazo desde los bosques de Alola.</strong><br>
+                Cuando recibas mi respuesta, empezaremos nuestra aventura juntos.<br>
+                ¡Prepárate para tener las mejores aventuras en Alola junto a mis amigos!
+            </p>
+            
+            <div style="margin-top: 30px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+                <span style="background: var(--morado-mimikyu); color: white; padding: 10px 20px; border-radius: 25px; font-weight: bold;">
+                    <i class="fas fa-ghost"></i> - Mimikyu
+                </span>
+                <span style="background: var(--amarillo-pikachu); color: black; padding: 10px 20px; border-radius: 25px; font-weight: bold;">
+                    <i class="fas fa-bolt"></i> - Pikachu
+                </span>
+            </div>
+        </div>
+        
+        <!-- IMAGEN DE DESPEDIDA -->
+        <div style="margin-top: 50px;">
+            <img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/778.png" 
+                 alt="Mimikyu despidiendo" 
+                 style="width: 180px; height: auto; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.3)); animation: flotarSuave 4s infinite ease-in-out;">
+            <p style="margin-top: 20px; font-style: italic; color: #666;">
+                "Los mejores Pokemones no usan motes, usan corazón"
+            </p>
+        </div>
+    </div>
+</section>
+
+        </main>
+        
+        <!-- FOOTER -->
+        <footer>
+            <p>© 2026 - <strong>Guarida Pokémon de Mimikyu & Pikachu</strong></p>
+            <p>Todos los derechos de Pokémon son propiedad de Nintendo, Game Freak y The Pokémon Company</p>
+            <p><small>Esta página es un proyecto educativo de HTML5, CSS3 y JavaScript - ¡Con amor para la comunidad Pokémon!</small></p>
+            <p style="margin-top: 15px; font-size: 0.8rem; color: #888;">
+                <i class="fas fa-code"></i> Código hecho con <i class="fas fa-heart" style="color: #FF0000;"></i> por Mimikyu y su tutor digital
+            </p>
+        </footer>
+    </div>
+    <!-- JAVASCRIPT -->
+    <script>
+        // CONTADOR DE VISITAS
+        let visitas = localStorage.getItem('visitasMimikyu') || 0;
+        visitas++;
+        localStorage.setItem('visitasMimikyu', visitas);
+        document.getElementById('contador').textContent = visitas;
+        
+             // Hacer que el correo sea fácil de copiar
+    document.addEventListener('DOMContentLoaded', function() {
+        const correoElement = document.querySelector('code');
+        if (correoElement) {
+            correoElement.title = "Haz clic para copiar";
+            correoElement.style.cursor = "pointer";
+            
+            correoElement.addEventListener('click', function() {
+                const textToCopy = "Elmrmimikyu@gmail.com";
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    // Efecto visual de copiado
+                    const originalColor = this.style.background;
+                    const originalContent = this.textContent;
+                    
+                    this.style.background = "#4CAF50";
+                    this.textContent = "¡Copiado! ✓";
+                    
+                    setTimeout(() => {
+                        this.style.background = originalColor;
+                        this.textContent = originalContent;
+                    }, 1500);
+                });
+            });
+        }
+    });
+        // CURIOSIDADES ALEATORIAS
+        const curiosidades = [
+            "Mimikyu es el único Pokémon que tiene una pagina hecha por el mismo, no leo lloros.",
+            "Pikachu fue diseñado basándose en una ardilla, no en un ratón.",
+            "Banette evoluciona de Shuppet cuando alcanza un alto nivel de resentimiento.",
+            "Umbreon es una de las evoluciones de Eevee, obtenida con amistad de noche.",
+            "Mimikyu tiene una habilidad única llamada 'Disfraz' que le protege del primer ataque.",
+            "Pikachu puede aprender Surf en algunos juegos, aunque no es de tipo agua.",
+            "La verdadera forma de Mimikyu es tan aterradora que hizo enfermar a quien la vio.",
+            "Los anillos de Umbreon brillan cuando está emocionado o en combate."
+        ];
+        
+        document.getElementById('btnCuriosidad').addEventListener('click', function() {
+            const randomIndex = Math.floor(Math.random() * curiosidades.length);
+            document.getElementById('curiosidad').textContent = curiosidades[randomIndex];
+        });
+        
+        // CONTADOR DE CARACTERES EN TEXTAREA
+        const textarea = document.getElementById('mensaje');
+        const contador = document.getElementById('contadorCaracteres');
+        
+        textarea.addEventListener('input', function() {
+            const caracteresRestantes = 500 - this.value.length;
+            contador.textContent = caracteresRestantes;
+            
+            if (caracteresRestantes < 50) {
+                contador.style.color = '#FF0000';
+            } else if (caracteresRestantes < 100) {
+                contador.style.color = '#FF9800';
+            } else {
+                contador.style.color = '#666';
+            }
+        });
+        
+        // MANEJO DEL FORMULARIO
+        document.getElementById('formularioUnirse').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validación adicional
+            const edad = parseInt(document.getElementById('edad').value);
+            if (edad < 10) {
+                alert('Debes tener al menos 10 años para ser entrenador Pokémon.');
+                return;
+            }
+            
+            // Mostrar mensaje de éxito
+            document.getElementById('mensajeExito').style.display = 'block';
+            
+            // Desplazarse al mensaje
+            document.getElementById('mensajeExito').scrollIntoView({ behavior: 'smooth' });
+            
+            // Opcional: Enviar datos a un servidor aquí
+            console.log('Formulario enviado:', {
+                nombre: document.getElementById('nombre').value,
+                email: document.getElementById('email').value,
+                edad: edad,
+                region: document.getElementById('region').value,
+                pokemonFav: document.getElementById('pokemonFav').value
+            });
+            
+            // Resetear formulario después de 5 segundos
+            setTimeout(() => {
+                this.reset();
+                document.getElementById('mensajeExito').style.display = 'none';
+                contador.textContent = '500';
+                contador.style.color = '#666';
+            }, 5000);
+        });
+        
+        // ANIMACIÓN DE SCROLL SUAVE PARA ENLACES INTERNOS
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 50,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // EFECTO PARPADEO EN EL TÍTULO
+        const titulo = document.querySelector('h1');
+        setInterval(() => {
+            titulo.style.textShadow = titulo.style.textShadow === '3px 3px 0px #FFD700, -1px -1px 0px #000, 1px -1px 0px #000, -1px 1px 0px #000, 1px 1px 0px #000' 
+                ? '3px 3px 0px #00FF00, -1px -1px 0px #000, 1px -1px 0px #000, -1px 1px 0px #000, 1px 1px 0px #000'
+                : '3px 3px 0px #FFD700, -1px -1px 0px #000, 1px -1px 0px #000, -1px 1px 0px #000, 1px 1px 0px #000';
+        }, 2000);
+        
+        // MENSAJE DE BIENVENIDA EN CONSOLA
+        console.log('%c🎮 ¡Bienvenido a la Guarida Pokémon! 🎮', 'color: #8B00FF; font-size: 20px; font-weight: bold;');
+        console.log('%cHecho con ❤️ por Mimikyu y su tutor digital', 'color: #FF6B00; font-size: 14px;');
+        console.log('%c¡Atrapa todos los conocimientos de programación!', 'color: #3B4CCA; font-size: 16px;');
+    </script>
+</body>
+</html>
